@@ -70,8 +70,6 @@ var todo_app = {
 
 				todo_app.homeView.render();
 
-				console.log(e);
-
 			});
 
 			// Puts a table in place for to-do items
@@ -84,6 +82,8 @@ var todo_app = {
 																		"<th>Due Date</th>",
 																		"<th>Created On</th>",
 																		"<th>Status</th>",
+																		"<th>Close Task</th>",
+																		"<th>Delete</th>",
 																	"</tr>",
 																"</thead>",
 																"<tbody id='todo-table-body'>",
@@ -94,9 +94,9 @@ var todo_app = {
 			todo_app.homeView.$container().append($table);
 
 			// Renders the task collection
+			var i = 1;
 			todo_item.collections.tasks.forEach(function(task){
-				var i = 1;
-				var task_html_array = ["<tr id=task"+ i +">",
+				var task_html_array = ["<tr id=task_"+ i +">",
 																"<td>",
 																	task.task,
 																"</td>",
@@ -109,8 +109,14 @@ var todo_app = {
 																"<td>",
 																	task.completed_status,
 																"</td>",
+																"<td>",
+																	"<button class='button secondary radius tiny'>Close</button>",
+																"</td>",
+																"<td>",
+																	"<button class='button alert radius tiny'>Delete</button>",
+																"</td>",
 															"</tr>"];
-
+															i++;
 				var $tasks_list = $(task_html_array.join(""));
 				todo_app.homeView.$taskList().append($tasks_list);
 			});
